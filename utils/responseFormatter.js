@@ -47,7 +47,7 @@ const createdResponse = (res, message, data) => {
   return successResponse(res, HTTP_STATUS.CREATED, message, data);
 };
 
-/
+
 const noContentResponse = (res) => {
   return res.status(HTTP_STATUS.NO_CONTENT).send();
 };
