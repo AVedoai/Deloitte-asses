@@ -1,7 +1,4 @@
-/**
- * Course Controller
- * Handles course CRUD operations and management
- */
+
 
 const courseModel = require('../models/courseModel');
 const lessonModel = require('../models/lessonModel');

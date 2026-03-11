@@ -28,13 +28,32 @@ const studentRoutes = require('./routes/studentRoutes');
 // Initialize Express application
 const app = express();
 
+// CORS Configuration - Allow Swagger and all origins (for Replit deployment)
+const corsOptions = {
+  origin: '*', // Allow all origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(getLogger());
 
-// Health Check Endpoint
+/**
+ * @swagger
+ * /health:
+ *   get:
+ *     summary: Health check endpoint
+ *     tags: [Health]
+ *     security: []
+ *     responses:
+ *       200:
+ *         description: Server is running
+ */
 app.get('/health', (req, res) => {
   res.status(200).json({
     status: 'ok',

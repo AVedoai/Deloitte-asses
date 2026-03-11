@@ -1,4 +1,3 @@
-
 const swaggerJsdoc = require('swagger-jsdoc');
 
 const options = {
@@ -8,27 +7,75 @@ const options = {
       title: 'Smart LMS API',
       version: '1.0.0',
       description: `
-        A comprehensive Learning Management System backend API built with Node.js and Express.
-        
-        **Features:**
-        - JWT-based Authentication & Authorization
-        - Course Management (CRUD operations)
-        - Lesson Management with ordering
-        - Student Enrollment System
-        - Progress Tracking & Analytics
-        - Role-Based Access Control (Admin, Instructor, Student)
-        - Interactive API Documentation
-        
-        **Authentication:**
-        Most endpoints require authentication. To authenticate:
-        1. Register a new user at POST /auth/register
-        2. Login at POST /auth/login to receive a JWT token
-        3. Include the token in the Authorization header: Bearer YOUR_TOKEN
-        
-        **Roles:**
-        - **Student**: Can enroll in courses and track progress
-        - **Instructor**: Can create and manage courses and lessons
-        - **Admin**: Full access to all operations
+A comprehensive Learning Management System backend API built with Node.js and Express.
+
+------------------------------
+🔐 AUTHORIZATION INSTRUCTIONS
+------------------------------
+
+Before calling protected APIs you must authorize.
+
+1️⃣ Click the **Authorize** button in the top right of Swagger UI.
+
+2️⃣ Under **bearerAuth (http, Bearer)** enter:
+
+Bearer YOUR_TOKEN
+
+3️⃣ Click **Authorize** then **Close**.
+
+------------------------------
+🔑 HOW TO GET TOKEN
+------------------------------
+
+First login using:
+
+POST /auth/login
+
+Example Request:
+
+{
+  "email": "admin@lms.com",
+  "password": "admin123"
+}
+
+The API will return a JWT token.
+
+Copy the token and use it in the **Authorize** button.
+
+------------------------------
+🧪 TEST USERS (Seed Data)
+------------------------------
+
+Admin  
+email: admin@lms.com  
+password: admin123  
+
+Instructor  
+email: instructor1@lms.com  
+password: instructor123  
+
+Student  
+email: student1@lms.com  
+password: student123  
+
+------------------------------
+⚠️ NOTE
+------------------------------
+
+Login and Register APIs **do not require authorization**.
+All other APIs require Bearer Token authentication.
+
+------------------------------
+✨ FEATURES
+------------------------------
+
+- JWT-based Authentication & Authorization
+- Course Management (CRUD operations)
+- Lesson Management with ordering
+- Student Enrollment System
+- Progress Tracking & Analytics
+- Role-Based Access Control (Admin, Instructor, Student)
+- Interactive API Documentation
       `,
       contact: {
         name: 'Prem Shinde',
@@ -41,17 +88,12 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:3000',
-        description: 'Development server'
+        url: 'https://deloitte-assesment--shindepremwork.replit.app',
+        description: 'Production server (Replit)'
       },
       {
-        url: 'https://{replit-url}',
-        description: 'Production server (Replit)',
-        variables: {
-          'replit-url': {
-            default: 'your-replit-url.repl.co'
-          }
-        }
+        url: 'http://localhost:3000',
+        description: 'Development server'
       }
     ],
     components: {
@@ -192,7 +234,7 @@ const options = {
       }
     ]
   },
-  apis: ['./routes/*.js', './index.js'] // Path to the API routes
+  apis: ['./routes/*.js', './index.js']
 };
 
 const swaggerSpec = swaggerJsdoc(options);
