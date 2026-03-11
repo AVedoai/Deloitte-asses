@@ -1,81 +1,31 @@
-const swaggerJsdoc = require('swagger-jsdoc');
 
 const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Smart LMS API',
+      title: 'Learning Management System API',
       version: '1.0.0',
       description: `
-A comprehensive Learning Management System backend API built with Node.js and Express.
+Learning Management System API - handles courses, enrollments, lessons, and student progress tracking with role-based access control.
 
-------------------------------
-🔐 AUTHORIZATION INSTRUCTIONS
-------------------------------
+⚠️ **Most endpoints require authentication** - without it, you'll get a 401 error.
 
-Before calling protected APIs you must authorize.
+**Quick Start:**
 
-1️⃣ Click the **Authorize** button in the top right of Swagger UI.
+1. **Get your token** - Login at POST /auth/login with these credentials:
+   - Admin: admin@lms.com / admin123
+   - Instructor: instructor1@lms.com / instructor123  
+   - Student: student1@lms.com / student123
 
-2️⃣ Under **bearerAuth (http, Bearer)** enter:
+2. **Authorize** - Click the green "Authorize" button (top right)
 
-Bearer YOUR_TOKEN
+3. **Enter token** - In the Value field, type: http 
 
-3️⃣ Click **Authorize** then **Close**.
+4. **Hit Authorize** - Click the "Authorize" button in the modal, then "Close"
 
-------------------------------
-🔑 HOW TO GET TOKEN
-------------------------------
+5. **Test endpoints** - Now you can try any endpoint you want!
 
-First login using:
-
-POST /auth/login
-
-Example Request:
-
-{
-  "email": "admin@lms.com",
-  "password": "admin123"
-}
-
-The API will return a JWT token.
-
-Copy the token and use it in the **Authorize** button.
-
-------------------------------
-🧪 TEST USERS (Seed Data)
-------------------------------
-
-Admin  
-email: admin@lms.com  
-password: admin123  
-
-Instructor  
-email: instructor1@lms.com  
-password: instructor123  
-
-Student  
-email: student1@lms.com  
-password: student123  
-
-------------------------------
-⚠️ NOTE
-------------------------------
-
-Login and Register APIs **do not require authorization**.
-All other APIs require Bearer Token authentication.
-
-------------------------------
-✨ FEATURES
-------------------------------
-
-- JWT-based Authentication & Authorization
-- Course Management (CRUD operations)
-- Lesson Management with ordering
-- Student Enrollment System
-- Progress Tracking & Analytics
-- Role-Based Access Control (Admin, Instructor, Student)
-- Interactive API Documentation
+**Note:** Registration and Login endpoints don't need authorization - everything else does.
       `,
       contact: {
         name: 'Prem Shinde',
@@ -102,8 +52,9 @@ All other APIs require Bearer Token authentication.
           type: 'http',
           scheme: 'bearer',
           bearerFormat: 'JWT',
-          description: 'Enter your JWT token in the format: Bearer YOUR_TOKEN'
+          description: 'JWT Authorization header using the Bearer scheme'
         }
+
       },
       schemas: {
         User: {
